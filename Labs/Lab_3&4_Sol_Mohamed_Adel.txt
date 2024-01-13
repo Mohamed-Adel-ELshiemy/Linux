@@ -1,0 +1,271 @@
+###########################################################################
+
+			*****Name: Mohamed Adel Melad *****
+			
+			     **** Lab_3_Solution ****
+
+###########################################################################
+
+3-Create a user account with the following attribute 
+● username: islam
+>> [root@IC Desktop]# useradd islam
+● Fullname/comment: Islam Askar
+>> if you are a super user: sudo useradd -c "Islam Askar" islam
+>> if you are a root: [root@IC Desktop]# useradd -c"Islam Askar" islam
+● Password: islam
+>> [root@IC Desktop]# passwd islam
+   Changing password for user islam.
+   New password: 
+   BAD PASSWORD: it is too short
+   BAD PASSWORD: is too simple
+   Retype new password: 
+   passwd: all authentication tokens updated successfully.
+
+############################################################################
+
+4-Create a user account with the following attribute 
+● Username: baduser 
+>> [root@IC Desktop]# useradd baduser
+● Full name/comment: Bad User
+>> if you are a super user: sudo useradd -c "Bad User" baduser
+>> if you are a root: [root@IC Desktop]# useradd -c "Bad User" baduser 
+● Password: baduser
+>> [root@IC Desktop]# passwd baduser
+   Changing password for user baduser.
+   New password: 
+   BAD PASSWORD: it is based on a dictionary word
+   BAD PASSWORD: is too simple
+   Retype new password: 
+   passwd: all authentication tokens updated successfully.
+
+#############################################################################
+
+5-Create a group called pgroup with group ID of 30000
+>> [root@IC Desktop]# groupadd -g 3000 pgroup
+   [root@IC Desktop]# tail -2 /etc/group
+   baduser:x:503:
+   pgroup:x:3000:
+
+##############################################################################
+
+6-Create a group called badgroup
+>> [root@IC Desktop]# groupadd badgroup
+   [root@IC Desktop]# tail -2 /etc/group
+   pgroup:x:3000:
+   badgroup:x:3001:
+
+#############################################################################################
+
+			**** Lab_4_solution *****
+
+#############################################################################################
+
+1. Add islam user to the pgroup group as a supplementary group 
+>> sudo usermod -a -G group_to_add username
+   Let’s break down this syntax:
+   -The -a flag tells usermod to add a user to a group.
+   -The -G flag specifies the name of the secondary group to which you want to add the user.
+>> [root@IC Desktop]# usermod -a -G pgroup islam
+   [root@IC Desktop]# tail -2 /etc/group
+   pgroup:x:3000:islam
+   badgroup:x:3001:
+
+#############################################################################################
+
+2. Log out and log in by another user 
+>> if you are the root. you don't need to know the user password:
+>> [root@IC Desktop]# su - islam
+   [islam@IC ~]$ exit
+   logout
+
+#############################################################################################
+
+3. Modify the password of islam's account to password
+>> [root@IC Desktop]# passwd islam
+   Changing password for user islam.
+   New password: unvisible when you write 
+   BAD PASSWORD: it is based on a dictionary word
+   Retype new password: 
+   passwd: all authentication tokens updated successfully.
+
+#############################################################################################
+
+4. Modify islam's account so the password expires after 30 days
+change expiration Options:
+  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY
+  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE
+  -h, --help                    display this help message and exit
+  -I, --inactive INACTIVE       set password inactive after expiration
+                                to INACTIVE
+  -l, --list                    show account aging information
+  -m, --mindays MIN_DAYS        set minimum number of days before password
+                                change to MIN_DAYS
+  -M, --maxdays MAX_DAYS        set maximim number of days before password
+                                change to MAX_DAYS
+  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS
+>> [root@IC Desktop]# chage -E 2023-11-15 -W 5 islam
+
+################################################################################################################
+
+5. Lock bad user account so he can't log in 
+The -l option disables an account by changing the password to a value which matches no possible encrypted value.
+>> [root@IC Desktop]# passwd -l baduser
+   Locking password for user baduser.
+   passwd: Success
+
+################################################################################################################
+
+6. Delete bad user account
+>> [root@IC Desktop]# userdel baduser
+   [root@IC Desktop]# tail -2 /etc/passwd
+   IC:x:501:501:EDA:/home/IC:/bin/bash
+   islam:x:502:502:Islam Askar:/home/islam:/bin/bash
+
+################################################################################################################
+
+7. Delete the group called badgroup.
+>> [root@IC Desktop]# tail -2 /etc/group
+   pgroup:x:3000:islam
+   badgroup:x:3001:
+   [root@IC Desktop]# groupdel badgroup
+   [root@IC Desktop]# tail -1 /etc/group
+   pgroup:x:3000:islam
+
+###############################################################################################################
+
+8. As you Super user, Set or change the password of root
+>> [root@IC Desktop]# sudo passwd root
+   Changing password for user root.
+   New password: 
+   BAD PASSWORD: it is too short
+   BAD PASSWORD: is too simple
+   Retype new password: 
+   passwd: all authentication tokens updated successfully.
+
+##############################################################################################################
+
+9. As you Super user, Try to remove all files in /tmp
+>> [IC@IC Desktop]$ su
+   Password: 
+   [root@IC Desktop]# ls
+   dir1  docs  file.txt  mypasswd  oldpasswd  temp
+   [root@IC Desktop]# sudo rm -rf /tmp/*
+   [root@IC Desktop]# ls
+   dir1  docs  file.txt  mypasswd  oldpasswd  temp 
+   [root@IC temp]# cd /temp
+   bash: No file or directory
+
+###############################################################################################################
+
+10. Create a folder called /tmp/myteam and change its permissions to read only for the owner, and Group and 
+    Otherdidn’t have permission on it.
+>> [IC@IC Desktop]$ mkdir ./temp/myteam
+   [IC@IC Desktop]$ ls
+   dir1  docs  file.txt  mypasswd  oldpasswd  temp
+   [IC@IC Desktop]$ cd temp
+   [IC@IC temp]$ ls
+   myconfig  mycv  myteam
+ [IC@IC temp]$ chmod 440 ./myteam  >>user=read only>>group=read only>other=nothing.
+ [IC@IC temp]$ ls -l -h
+ total 12K
+ drwxrwxr-x. 2 IC IC 4.0K Oct 12 22:05 myconfig
+ -rw-rw-r--. 1 IC IC   99 Oct 12 22:42 mycv
+ dr--r-----. 2 IC IC 4.0K Oct 15 21:09 myteam
+
+###############################################################################################################
+
+12. Try to access (by cd command) the folder (myteam).
+>> [IC@IC temp]$ sudo cd /myteam
+   bash: cd: myteam: Permission denied
+
+###############################################################################################################
+
+13. Change the permissions of /tmp/mycv file to give owner read and write permissions and for group write and
+    execute and execute only for the others (using chmod in 2 different ways )
+>>first way:[IC@IC Desktop]$ chmod u=rw,g=wx,o=x ./temp/mycv
+            [IC@IC Desktop]$ cd ./temp
+            [IC@IC temp]$ ls -l -h
+            total 12K
+            drwxrwxr-x. 2 IC IC 4.0K Oct 12 22:05 myconfig
+            -rw--wx--x. 1 IC IC   99 Oct 12 22:42 mycv
+            dr--r-----. 2 IC IC 4.0K Oct 15 21:09 myteam
+
+
+
+>>second way:[IC@IC Desktop]$ chmod 631 ./temp/mycv
+             [IC@IC Desktop]$ cd ./temp
+             [IC@IC temp]$ ls
+             myconfig  mycv  myteam
+             [IC@IC temp]$ ls -l -h
+	     total 12K
+             drwxrwxr-x. 2 IC IC 4.0K Oct 12 22:05 myconfig
+             -rw--wx--x. 1 IC IC   99 Oct 12 22:42 mycv
+             dr--r-----. 2 IC IC 4.0K Oct 15 21:09 myteam
+
+###############################################################################################################
+
+14. What are the minimum permission needed for : 
+a. Copy a file (permission for source file and permission for target parent directory) 
+  >> read and write and execute
+b. Delete a file 
+  >> read and execute
+c. Change to a directory 
+  >> read and write 
+d. List a directory content (ls command)
+  >> read and execute 
+e. View a file content (more/cat command) 
+  >> read and write and execute
+f. Modify a file content
+  >> read and write and execute
+
+################################################################################################################
+
+15. Create a file with permission 444 in /tmp directory. Try to edit in it and to remove it? Note what happened.
+>> when I want to edit the file (file1.txt), the data was writen in thet file impossible to save it.
+
+>> [IC@IC temp]$ chmod 444 file1.txt
+   [IC@IC temp]$ ls -l -h
+   total 12K
+   -r--r--r--. 1 IC IC    0 Oct 15 22:07 file1.txt
+   drwxrwxr-x. 2 IC IC 4.0K Oct 12 22:05 myconfig
+   -rw--wx--x. 1 IC IC   99 Oct 12 22:42 mycv
+   dr--r-----. 2 IC IC 4.0K Oct 15 21:09 myteam
+   [IC@IC temp]$ gedit file1.txt
+
+>> when I want to edit the file (file1.txt):
+>> [IC@IC temp]$ rm file1.txt
+   rm: remove write-protected regular empty file `file1.txt'?  
+
+################################################################################################################
+
+16. What is the difference between the “x” permission for a file and for a directory
+>> execute (x) Execute permission on files means the right to execute them, if they are programs. 
+   (Files that are not programs should not be given the execute permission.) For directories, execute 
+   permission allows you to enter the directory, and to access any of its files.
+
+################################################################################################################
+
+21. How to check if your internet connection is work?
+>> Using the ping Command.
+   [IC@IC temp]$ ping -c 1 baeldung.com
+   PING baeldung.com (172.66.43.8) 56(84) bytes of data.
+   64 bytes from 172.66.43.8: icmp_seq=1 ttl=128 time=81.2 ms
+
+   --- baeldung.com ping statistics ---
+   1 packets transmitted, 1 received, 0% packet loss, time 438ms
+   rtt min/avg/max/mdev = 81.284/81.284/81.284/0.000 ms
+
+   >> Above, we’ve used the ping command to check the connection between our network and the baeldung.com 
+      website. In addition to it, we’ve used the -c option, to transmit a particular number of packets, 
+      defined after the option.
+
+>> Using a Combination of cat and echo.
+
+################################################################################################################
+
+22. By editing /etc/hosts, make the URL www.iti-project-dep.com forward you to 195.10.10.2
+   
+   >> [IC@IC Desktop]$ vi ./etc/hosts
+   >> the content of /etc/hosts file is: 195.10.10.2 www.iti-project-dep.com 
+
+#################################################################################################################

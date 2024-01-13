@@ -1,0 +1,125 @@
+1- Create the following hierarchy under your home directory:
+>> [IC@IC Desktop]$ mkdir -p docs/mycv >> for recursive director creation.
+>> [IC@IC Desktop]$ mkdir -p dir1/dir12
+>> [IC@IC Desktop]$ mkdir -p dir1/dir11/file1 >> here file1 is a directory.
+   [IC@IC Desktop]$ cd dir1/dir11
+   [IC@IC dir11]$ touch file1 >> here file1 is a file.
+   [IC@IC dir11]$ ls
+   file1
+   [IC@IC dir11]$ mv file1 file1.txt
+   [IC@IC dir11]$ ls
+   file1.txt
+
+2- Remove dir11 in one-step. What did you notice? And how did you overcome that?
+>> [IC@IC Desktop]$ ls
+   dir1  docs  file.txt
+   [IC@IC Desktop]$ cd  dir1 
+   [IC@IC dir1]$ ls
+   dir11  dir12
+   [IC@IC dir1]$ rm -r dir11
+   [IC@IC dir1]$ ls
+   dir12
+
+3- Copy the /etc/passwd file to your home directory making its name is mypasswd.
+>> [IC@IC Desktop]$ cp /etc/passwd mypasswd
+
+4- Rename this new file (which at your home) to be oldpasswd 
+>> [IC@IC Desktop]$ touch newfile
+   [IC@IC Desktop]$ mv newfile oldpasswd
+
+5- Write the command which display the man page of the passwd file”/etc/passwd”.
+>> [IC@IC Desktop]$ man /etc/passwd
+
+6- Write the command which display a list of all the commands that contain the keyword “passwd” in their man/manual page. 
+>> [IC@IC Desktop]$ ls -k passwd
+ls: cannot access passwd: No such file or directory
+[IC@IC Desktop]$ man -k passwd
+chpasswd             (8)  - update passwords in batch mode
+fgetpwent_r [getpwent_r] (3)  - get passwd file entry reentrantly
+getpwent_r           (3)  - get passwd file entry reentrantly
+gpasswd              (1)  - administer /etc/group and /etc/gshadow
+htpasswd             (1)  - Manage user files for basic authentication
+kpasswd              (1)  - change a user's Kerberos password
+lpasswd              (1)  - Change group or user password
+lppasswd             (1)  - add, change, or delete digest passwords
+pam_localuser        (8)  - require users to be listed in /etc/passwd
+pam_passwdqc         (8)  - Password quality-control PAM module
+passwd               (1)  - update user's authentication tokens
+passwd2des [xcrypt]  (3)  - RFS password encryption
+passwd               (5)  - password file
+passwd [sslpasswd]   (1ssl)  - compute password hashes
+saslpasswd2          (8)  - set a user's sasl password
+smbpasswd            (5)  - The Samba encrypted password file
+smbpasswd            (8)  - change a users SMB password
+userpasswd           (1)  - A graphical tool to allow users to change their passwords
+ypchfn [yppasswd]    (1)  - change your password in the NIS database
+ypchsh [yppasswd]    (1)  - change your password in the NIS database
+yppasswd             (1)  - change your password in the NIS database
+
+7- You are in /usr/bin, list four ways to go to your home directory 
+>> cd
+>> dc~
+>> cd ./home or cd home
+>> cd ../../home
+
+8- The output of the command pwd was /home/<your_user_name>. Write the absolute and relative path for the file /etc/passwd
+>> the absolute path: [IC@IC ~]$ cd /etc
+ 
+
+>> relative path: [IC@IC ~]$ cd ../../etc
+
+9- Show the total directory size of /home/<your_user_name>.
+>> [IC@IC ~]$ du -sh ./iti
+   14M	  ./iti
+
+10- List all files at your /etc which end with .config
+>> [IC@IC etc]$ ls *.config
+man.config
+
+11- Create a folder called /tmp/myconfig and copy to it all .config files from etc to it
+>> [IC@IC Desktop]$ mkdir -p temp/myconfig
+   [IC@IC Desktop]$ ls
+   dir1  docs  file.txt  mypasswd  oldpasswd  temp
+   [IC@IC Desktop]$ cp /etc/man.config ./temp/myconfig/ 
+   [IC@IC Desktop]$ ls
+   dir1  docs  file.txt  mypasswd  oldpasswd  temp
+   [IC@IC Desktop]$ cd temp/myconfig/
+   [IC@IC myconfig]$ ls
+   man.config
+
+12- Remove the directory /tmp/myconfig
+>>  [IC@IC ]$ rm -r ./temp/myconfig
+
+13- Display lines 1 to line 5 of /etc/passwd file
+>> [IC@IC myconfig]$ head -5 /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+
+
+lab_3 
+
+1_ Using vi write your CV in the file /tmp/mycv. Your CV should include your name, age, school, college, experience,... 
+>> [IC@IC temp]$ touch mycv
+   [IC@IC temp]$ vi mycv
+   [IC@IC temp]$ gedit mycv
+
+2_ Open /tmp/mycv file using vi command then: Without using arrows 
+state how to: 
+>> -- vi --
+
+Move the cursor down one line at time: 	 j
+Move the cursor up one line at time:   k
+Search for word age: /age
+Step to line 5: ":5"
+Delete the line you are on: dd
+Delete line number 5: ":5d"
+How to step to the end of line and change to writing mode in one-step: shift l  i 
+
+
+
+
+
+

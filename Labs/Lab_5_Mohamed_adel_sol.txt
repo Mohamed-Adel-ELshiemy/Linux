@@ -1,0 +1,1184 @@
+###############################################################################################
+
+				***** Name:Mohamed Adel Melad *****
+
+				      **** Lab 5_1 Q 17-22 ****
+
+################################################################################################
+
+17.Get the logins name and full names (comment) of logins starts with “gu”.
+
+[root@IC ~]# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+gopher:x:13:30:gopher:/var/gopher:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+usbmuxd:x:113:113:usbmuxd user:/:/sbin/nologin
+vcsa:x:69:69:virtual console memory owner:/dev:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/cache/rpcbind:/sbin/nologin
+rtkit:x:499:497:RealtimeKit:/proc:/sbin/nologin
+avahi-autoipd:x:170:170:Avahi IPv4LL Stack:/var/lib/avahi-autoipd:/sbin/nologin
+abrt:x:173:173::/etc/abrt:/sbin/nologin
+apache:x:48:48:Apache:/var/www:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/sbin/nologin
+haldaemon:x:68:68:HAL daemon:/:/sbin/nologin
+gdm:x:42:42::/var/lib/gdm:/sbin/nologin
+ntp:x:38:38::/etc/ntp:/sbin/nologin
+saslauth:x:498:76:Saslauthd user:/var/empty/saslauth:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+pulse:x:497:495:PulseAudio System Daemon:/var/run/pulse:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+IC:x:501:501:EDA:/home/IC:/bin/bash
+islam:x:502:502:Islam Askar:/home/islam:/bin/bash
+[root@IC ~]# cut -d: -f1 /etc/passwd 
+root
+bin
+daemon
+adm
+lp
+sync
+shutdown
+halt
+mail
+uucp
+operator
+games
+gopher
+ftp
+nobody
+dbus
+usbmuxd
+vcsa
+rpc
+rtkit
+avahi-autoipd
+abrt
+apache
+rpcuser
+nfsnobody
+haldaemon
+gdm
+ntp
+saslauth
+postfix
+pulse
+sshd
+tcpdump
+IC
+islam
+[root@IC ~]# cut -d: -f1 /etc/passwd | grep gu   >> no "gu" matched at all.
+
+############################################################################################
+
+18.Display the number of users who is logged now to the system.
+
+[root@IC ~]# who
+IC       tty1         2023-10-11 19:47 (:0)
+IC       pts/0        2023-10-15 19:07 (:0.0)
+[root@IC ~]# 
+[root@IC ~]# who | wc -l 
+2
+
+################################################################################################
+
+19.Display lines 7 to line 10 of /etc/passwd file.
+
+[root@IC ~]# sed -n '7,10p' /etc/passwd
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin
+
+OR
+
+[root@IC ~]# head -n 10 /etc/passwd | tail -n 4
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin
+
+
+##################################################################################################
+
+20.Search for all files on the system that named “.bash_profile” using two methods.
+
+method one: 
+
+[root@IC ~]# find / -name "*.bash_profile"
+/root/.bash_profile
+/etc/skel/.bash_profile
+/home/IC/.bash_profile
+/home/IC/etc/skel/.bash_profile
+/home/islam/.bash_profile
+/home/baduser/.bash_profile
+
+method two: the only difference is getting searched result quickly 
+
+[root@IC ~]# locate .bash_profile
+
+/root/.bash_profile
+/etc/skel/.bash_profile
+/home/IC/.bash_profile
+/home/IC/etc/skel/.bash_profile
+/home/islam/.bash_profile
+/home/baduser/.bash_profile
+
+##############################################################################################
+
+22.Kill your processes only (be care: save lab before command execution).
+
+[root@IC ~]# kill
+
+
+#################################################################################################
+
+				        **** Lab 5_2 ****
+
+#################################################################################################
+
+1. Sort /etc/passwd based on the full names of users and save output to external file.
+
+[IC@IC Desktop]$ pwd
+/home/IC/Desktop
+[IC@IC Desktop]$ cat /etc/passwd | sort >> /home/IC/Desktop/textfile
+
+#################################################################################################
+
+2. Search for all files on the system that named “passwd” using two methods.
+
+first way: using find
+
+[root@IC IC]# find / -name "*passwd*"
+
+second way: locate <word need to search about it>
+
+[root@IC IC]# locate passwd
+
+/root/.simvision/passwd
+/usr/include/rpcsvc/yppasswd.h
+/usr/include/rpcsvc/yppasswd.x
+/usr/lib64/samba/libsmbpasswdparser.so
+/usr/sbin/lpasswd
+/usr/sbin/chpasswd
+/usr/sbin/saslpasswd2
+/usr/bin/yppasswd
+/usr/bin/htpasswd
+/usr/bin/smbpasswd
+/usr/bin/userpasswd
+/usr/bin/kpasswd
+/usr/bin/gpasswd
+/usr/bin/passwd
+/usr/bin/vino-passwd
+/usr/bin/lppasswd
+/usr/share/locale/cy/LC_MESSAGES/passwd.mo
+/usr/share/locale/mr/LC_MESSAGES/passwd.mo
+/usr/share/locale/ur/LC_MESSAGES/passwd.mo
+/usr/share/locale/hi/LC_MESSAGES/passwd.mo
+/usr/share/locale/pl/LC_MESSAGES/passwd.mo
+/usr/share/locale/nl/LC_MESSAGES/passwd.mo
+/usr/share/locale/ml/LC_MESSAGES/passwd.mo
+/usr/share/locale/fr/LC_MESSAGES/passwd.mo
+/usr/share/locale/zh_TW/LC_MESSAGES/passwd.mo
+/usr/share/locale/fi/LC_MESSAGES/passwd.mo
+/usr/share/locale/de/LC_MESSAGES/passwd.mo
+/usr/share/locale/ca/LC_MESSAGES/passwd.mo
+/usr/share/locale/ka/LC_MESSAGES/passwd.mo
+/usr/share/locale/si/LC_MESSAGES/passwd.mo
+/usr/share/locale/tr/LC_MESSAGES/passwd.mo
+/usr/share/locale/ko/LC_MESSAGES/passwd.mo
+/usr/share/locale/ro/LC_MESSAGES/passwd.mo
+/usr/share/locale/ta/LC_MESSAGES/passwd.mo
+/usr/share/locale/vi/LC_MESSAGES/passwd.mo
+/usr/share/locale/lo/LC_MESSAGES/passwd.mo
+/usr/share/locale/te/LC_MESSAGES/passwd.mo
+/usr/share/locale/pt_BR/LC_MESSAGES/passwd.mo
+/usr/share/locale/ru/LC_MESSAGES/passwd.mo
+/usr/share/locale/gl/LC_MESSAGES/passwd.mo
+/usr/share/locale/zh_CN/LC_MESSAGES/passwd.mo
+/usr/share/locale/wa/LC_MESSAGES/passwd.mo
+/usr/share/locale/hu/LC_MESSAGES/passwd.mo
+/usr/share/locale/kn/LC_MESSAGES/passwd.mo
+/usr/share/locale/pt/LC_MESSAGES/passwd.mo
+/usr/share/locale/sl/LC_MESSAGES/passwd.mo
+/usr/share/locale/sk/LC_MESSAGES/passwd.mo
+/usr/share/locale/hr/LC_MESSAGES/passwd.mo
+/usr/share/locale/ku/LC_MESSAGES/passwd.mo
+/usr/share/locale/as/LC_MESSAGES/passwd.mo
+/usr/share/locale/bn/LC_MESSAGES/passwd.mo
+/usr/share/locale/gu/LC_MESSAGES/passwd.mo
+/usr/share/locale/et/LC_MESSAGES/passwd.mo
+/usr/share/locale/bs/LC_MESSAGES/passwd.mo
+/usr/share/locale/is/LC_MESSAGES/passwd.mo
+/usr/share/locale/da/LC_MESSAGES/passwd.mo
+/usr/share/locale/ar/LC_MESSAGES/passwd.mo
+/usr/share/locale/bn_IN/LC_MESSAGES/passwd.mo
+/usr/share/locale/sq/LC_MESSAGES/passwd.mo
+/usr/share/locale/or/LC_MESSAGES/passwd.mo
+/usr/share/locale/id/LC_MESSAGES/passwd.mo
+/usr/share/locale/bg/LC_MESSAGES/passwd.mo
+/usr/share/locale/it/LC_MESSAGES/passwd.mo
+/usr/share/locale/sv/LC_MESSAGES/passwd.mo
+/usr/share/locale/uk/LC_MESSAGES/passwd.mo
+/usr/share/locale/el/LC_MESSAGES/passwd.mo
+/usr/share/locale/ms/LC_MESSAGES/passwd.mo
+/usr/share/locale/he/LC_MESSAGES/passwd.mo
+/usr/share/locale/sr@latin/LC_MESSAGES/passwd.mo
+/usr/share/locale/ja/LC_MESSAGES/passwd.mo
+/usr/share/locale/fa/LC_MESSAGES/passwd.mo
+/usr/share/locale/nb/LC_MESSAGES/passwd.mo
+/usr/share/locale/nn/LC_MESSAGES/passwd.mo
+/usr/share/locale/my/LC_MESSAGES/passwd.mo
+/usr/share/locale/pa/LC_MESSAGES/passwd.mo
+/usr/share/locale/en_GB/LC_MESSAGES/passwd.mo
+/usr/share/locale/sr/LC_MESSAGES/passwd.mo
+/usr/share/locale/cs/LC_MESSAGES/passwd.mo
+/usr/share/locale/mk/LC_MESSAGES/passwd.mo
+/usr/share/locale/es/LC_MESSAGES/passwd.mo
+/usr/share/locale/hy/LC_MESSAGES/passwd.mo
+/usr/share/awk/passwd.awk
+/usr/share/man/pl/man8/chpasswd.8.gz
+/usr/share/man/pl/man1/gpasswd.1.gz
+/usr/share/man/fr/man8/chpasswd.8.gz
+/usr/share/man/fr/man1/gpasswd.1.gz
+/usr/share/man/zh_TW/man8/chpasswd.8.gz
+/usr/share/man/man8/saslpasswd2.8.gz
+/usr/share/man/man8/smbpasswd.8.gz
+/usr/share/man/man8/pam_passwdqc.8.gz
+/usr/share/man/man8/chpasswd.8.gz
+/usr/share/man/overrides/ru/man3/passwd2des.3.gz
+/usr/share/man/overrides/ru/man5/passwd.5.gz
+/usr/share/man/overrides/man1/userpasswd.1.gz
+/usr/share/man/pt_BR/man1/gpasswd.1.gz
+/usr/share/man/ru/man8/chpasswd.8.gz
+/usr/share/man/ru/man1/gpasswd.1.gz
+/usr/share/man/zh_CN/man8/chpasswd.8.gz
+/usr/share/man/hu/man1/gpasswd.1.gz
+/usr/share/man/it/man8/chpasswd.8.gz
+/usr/share/man/it/man1/gpasswd.1.gz
+/usr/share/man/man3/passwd2des.3.gz
+/usr/share/man/man5/smbpasswd.5.gz
+/usr/share/man/man5/passwd.5.gz
+/usr/share/man/sv/man8/chpasswd.8.gz
+/usr/share/man/sv/man1/gpasswd.1.gz
+/usr/share/man/ja/man8/chpasswd.8.gz
+/usr/share/man/ja/man1/gpasswd.1.gz
+/usr/share/man/man1/kpasswd.1.gz
+/usr/share/man/man1/lppasswd.1.gz
+/usr/share/man/man1/userpasswd.1.gz
+/usr/share/man/man1/htpasswd.1.gz
+/usr/share/man/man1/yppasswd.1.gz
+/usr/share/man/man1/passwd.1.gz
+/usr/share/man/man1/sslpasswd.1ssl.gz
+/usr/share/man/man1/gpasswd.1.gz
+/usr/share/man/man1/lpasswd.1.gz
+/usr/share/man/cs/man1/gpasswd.1.gz
+/usr/share/doc/perl-Net-SSLeay-1.35/examples/passwd-cb.pl
+/usr/share/doc/krb5-workstation-1.10.3/kpasswd.html
+/usr/share/doc/passwd-0.77
+/usr/share/doc/python-ldap-2.3.10/Demo/passwd_ext_op.py
+/usr/share/doc/pam_passwdqc-1.0.5
+/usr/share/applications/redhat-userpasswd.desktop
+/usr/share/cups/www/help/man-lppasswd.html
+/usr/share/augeas/lenses/dist/htpasswd.aug
+/usr/share/augeas/lenses/dist/passwd.aug
+/usr/share/vim/vim74/syntax/passwd.vim
+/usr/share/vim/vim74/ftplugin/passwd.vim
+/usr/lib/python2.6/site-packages/ipalib/plugins/passwd.py
+/usr/lib/python2.6/site-packages/ipalib/plugins/passwd.pyc
+/usr/lib/python2.6/site-packages/ipalib/plugins/passwd.pyo
+/opt/Synopsys/ICC2016/auxx/syn/fp/bw/images/passwd.gif
+/opt/Synopsys/ICC2016/auxx/syn/fp/bw/passwddlg.tcl
+/opt/Synopsys/Laker_OA2015/etc/BWidget/images/passwd.gif
+/opt/Synopsys/Laker_OA2015/etc/BWidget/passwddlg.tcl
+/opt/Synopsys/Verdi2015/etc/access/BWidget/images/passwd.gif
+/opt/Synopsys/Verdi2015/etc/access/BWidget/passwddlg.tcl
+/opt/Synopsys/Verdi2015/share/python/linux64/lib/python2.7/test/ssl_key.passwd.pem
+/opt/Synopsys/Verdi2015/share/python/linux64/lib/python2.7/test/keycert.passwd.pem
+/opt/Mentor/Tessent2013/lib/tools/tcl/BWidget/images/passwd.gif
+/opt/Mentor/Tessent2013/lib/tools/tcl/BWidget/passwddlg.tcl
+/opt/Mentor/Calibre2015/ixl_cal_2015.4_16.11/pkgs/icv_hier_widgets.ixl/lib/RamDebugger/addons/bwidgetR1.6/images/passwd.gif
+/opt/Mentor/Calibre2015/ixl_cal_2015.4_16.11/pkgs/icv_hier_widgets.ixl/lib/RamDebugger/addons/bwidgetR1.6/passwddlg.tcl
+/opt/Mentor/Calibre2015/ixl_cal_2015.4_16.11/pkgs/icv_comp.ixl/8.4/lib/BWidget-1.8.0/images/passwd.gif
+/opt/Mentor/Calibre2015/ixl_cal_2015.4_16.11/pkgs/icv_comp.ixl/8.4/lib/BWidget-1.8.0/passwddlg.tcl
+/opt/Mentor/DFT/mgc_home.ixe/pkgs/BWidget_ui.ixe/lib/BWidget/passwddlg.tbc
+/opt/Mentor/DFT/mgc_home.ixe/pkgs/BWidget_ui.ixe/lib/BWidget/images/passwd.gif
+/opt/Cadence/MMSIM15/tools.lnx86/python/32bit/lib/python3.4/test/ssl_key.passwd.pem
+/opt/Cadence/MMSIM15/tools.lnx86/python/32bit/lib/python3.4/test/keycert.passwd.pem
+/opt/Cadence/MMSIM15/tools.lnx86/python/64bit/lib/python3.4/test/ssl_key.passwd.pem
+/opt/Cadence/MMSIM15/tools.lnx86/python/64bit/lib/python3.4/test/keycert.passwd.pem
+/var/lib/yum/yumdb/p/38b4293a7cb64447183291cbf4f0bc01800a2bf5-passwd-0.77-4.el6_2.2-x86_64
+/var/lib/yum/yumdb/p/7f9b4669a94f01da721be94e1e62ba284ccd238e-pam_passwdqc-1.0.5-8.el6-x86_64
+/lib64/security/pam_passwdqc.so
+/lib64/security/pam_unix_passwd.so
+/etc/pam.d/passwd
+/etc/passwd
+/etc/passwd-
+/etc/security/opasswd
+/home/IC/.simvision/passwd
+/home/IC/Desktop/mypasswd
+/home/IC/Desktop/oldpasswd
+/selinux/class/passwd
+/selinux/class/passwd/perms/passwd
+
+
+#################################################################################################
+
+3. Install Packages called ncompress,ksh
+
+[root@IC IC]# yum search ncompress
+[root@IC IC]# yum install ncompress
+
+#################################################################################################
+
+4. Compress a file by compress, bzip2 commands and decompress it again.
+
+5. What is the command used to view the content of a .Z compressed file.
+
+>> for compress:
+
+[root@IC IC]# compress ./Desktop/file.txt
+[root@IC IC]# zcat ./Desktop/file.txt.bz2
+1.date
+2.cal
+3.uname >>> type of operating system
+4.history >>> all above commands 
+5.clear ==ctrl+l
+6. ctrl+r >>> search in history
+7.nautilus >>> file maneger like pc
+8. uname -n >> your name 
+9. uname -a >>> all information about your device
+10.cal ;uname >>>; seperate between commands
+11.man uname >>> manual of way to using command 
+12.q >>> logout of manual
+13.uname -n -a >>> multi options
+14. man -k >>> search about keyword in manual
+15.whatis + command >>> manual abaut this command 
+16.echo +string >>> print this string 
+********* directory commands *********
+1.pwd >>> print location
+2. cd + directory >>> change directory
+3.ls >>> content in directory
+4.touch >>> create a file 
+5.rm >>> remove file 
+6.mkdir >>> make directory
+7.rmdir >>> remove empty directory 
+8.rm -r + dir >>> remove directory
+9.cat +file >>> show entire the file 
+10.more >>> page by page
+11.head >>> first 10 lines
+12head -5 >>> first 5 lines
+13.tail >>>  end 10 lines 
+14.
+  Wed Oct 11 20:35:12 CST 2023
+[root@IC IC]# uncompress ./Desktop/file.txt.bz2
+
+>> for bzip2:
+
+[root@IC IC]# bzip2 ./Desktop/file.txt
+[root@IC IC]# bzcat ./Desktop/file.txt.bz2
+1.date
+2.cal
+3.uname >>> type of operating system
+4.history >>> all above commands 
+5.clear ==ctrl+l
+6. ctrl+r >>> search in history
+7.nautilus >>> file maneger like pc
+8. uname -n >> your name 
+9. uname -a >>> all information about your device
+10.cal ;uname >>>; seperate between commands
+11.man uname >>> manual of way to using command 
+12.q >>> logout of manual
+13.uname -n -a >>> multi options
+14. man -k >>> search about keyword in manual
+15.whatis + command >>> manual abaut this command 
+16.echo +string >>> print this string 
+********* directory commands *********
+1.pwd >>> print location
+2. cd + directory >>> change directory
+3.ls >>> content in directory
+4.touch >>> create a file 
+5.rm >>> remove file 
+6.mkdir >>> make directory
+7.rmdir >>> remove empty directory 
+8.rm -r + dir >>> remove directory
+9.cat +file >>> show entire the file 
+10.more >>> page by page
+11.head >>> first 10 lines
+12head -5 >>> first 5 lines
+13.tail >>>  end 10 lines 
+14.
+  Wed Oct 11 20:35:12 CST 2023
+
+[root@IC IC]# bunzip2 ./Desktop/file.txt.bz2
+
+
+#################################################################################################
+
+6. Backup/Archive /etc directory using tar utility. 
+
+[root@IC IC]# tar cvf etc_archive.tar /etc
+
+/etc/sos.conf
+/etc/sudo.conf
+/etc/PackageKit/
+/etc/PackageKit/Vendor.conf
+/etc/PackageKit/PackageKit.conf
+/etc/sysctl.conf
+/etc/libuser.conf
+/etc/pkcs11/
+/etc/pkcs11/modules/
+/etc/redhat-release
+/etc/iproute2/
+/etc/iproute2/rt_protos
+/etc/iproute2/rt_scopes
+/etc/iproute2/rt_realms
+/etc/iproute2/rt_tables
+/etc/iproute2/ematch_map
+/etc/iproute2/rt_dsfield
+/etc/pinforc
+/etc/readahead.conf
+/etc/gssapi_mech.conf
+/etc/selinux/
+/etc/selinux/config
+/etc/selinux/restorecond_user.conf
+/etc/selinux/semanage.conf
+/etc/selinux/restorecond.conf
+/etc/selinux/targeted/
+/etc/selinux/targeted/setrans.conf
+/etc/selinux/targeted/seusers
+/etc/selinux/targeted/contexts/
+/etc/selinux/targeted/contexts/virtual_image_context
+/etc/selinux/targeted/contexts/netfilter_contexts
+/etc/selinux/targeted/contexts/x_contexts
+/etc/selinux/targeted/contexts/removable_context
+/etc/selinux/targeted/contexts/failsafe_context
+/etc/selinux/targeted/contexts/initrc_context
+/etc/selinux/targeted/contexts/securetty_types
+/etc/selinux/targeted/contexts/customizable_types
+/etc/selinux/targeted/contexts/users/
+/etc/selinux/targeted/contexts/users/root
+/etc/selinux/targeted/contexts/users/unconfined_u
+/etc/selinux/targeted/contexts/users/xguest_u
+/etc/selinux/targeted/contexts/users/user_u
+/etc/selinux/targeted/contexts/users/guest_u
+/etc/selinux/targeted/contexts/users/staff_u
+/etc/selinux/targeted/contexts/files/
+/etc/selinux/targeted/contexts/files/file_contexts.homedirs
+/etc/selinux/targeted/contexts/files/media
+/etc/selinux/targeted/contexts/files/file_contexts
+/etc/selinux/targeted/contexts/default_contexts
+/etc/selinux/targeted/contexts/userhelper_context
+/etc/selinux/targeted/contexts/sepgsql_contexts
+/etc/selinux/targeted/contexts/dbus_contexts
+/etc/selinux/targeted/contexts/virtual_domain_context
+/etc/selinux/targeted/contexts/default_type
+/etc/selinux/targeted/policy/
+/etc/selinux/targeted/policy/policy.24
+/etc/selinux/targeted/logins/
+/etc/selinux/targeted/modules/
+/etc/selinux/targeted/modules/semanage.trans.LOCK
+/etc/selinux/targeted/modules/active/
+/etc/selinux/targeted/modules/active/base.pp
+/etc/selinux/targeted/modules/active/netfilter_contexts
+/etc/selinux/targeted/modules/active/file_contexts.homedirs
+/etc/selinux/targeted/modules/active/policy.kern
+/etc/selinux/targeted/modules/active/file_contexts.template
+/etc/selinux/targeted/modules/active/users_extra
+/etc/selinux/targeted/modules/active/homedir_template
+/etc/selinux/targeted/modules/active/seusers.final
+/etc/selinux/targeted/modules/active/modules/
+/etc/selinux/targeted/modules/active/modules/java.pp
+/etc/selinux/targeted/modules/active/modules/devicekit.pp
+/etc/selinux/targeted/modules/active/modules/livecd.pp
+/etc/selinux/targeted/modules/active/modules/awstats.pp
+/etc/selinux/targeted/modules/active/modules/smstools.pp
+/etc/selinux/targeted/modules/active/modules/zosremote.pp
+/etc/selinux/targeted/modules/active/modules/uucp.pp
+/etc/selinux/targeted/modules/active/modules/qpidd.pp
+/etc/selinux/targeted/modules/active/modules/fprintd.pp
+/etc/selinux/targeted/modules/active/modules/arpwatch.pp
+/etc/selinux/targeted/modules/active/modules/mysql.pp
+/etc/selinux/targeted/modules/active/modules/likewise.pp
+/etc/selinux/targeted/modules/active/modules/policykit.pp
+/etc/selinux/targeted/modules/active/modules/gpsd.pp
+/etc/selinux/targeted/modules/active/modules/openshift-origin.pp
+/etc/selinux/targeted/modules/active/modules/mip6d.pp
+/etc/selinux/targeted/modules/active/modules/podsleuth.pp
+
+
+[root@IC IC]# ll
+total 37552
+-rw-r--r--.  1 root root   100889 Oct 18 12:01 ads_lic.log
+drwxrwxrwx.  4 IC   IC       4096 Oct  1  2022 Assignments
+drwxrwxrwx.  7 IC   IC       4096 Oct 18 13:43 Desktop
+drwxrwxrwx.  2 IC   IC       4096 Apr  4  2017 Documents
+drwxrwxrwx.  2 IC   IC       4096 Apr  4  2017 Downloads
+-rw-r--r--.  1 root root 37867520 Oct 18 13:52 etc_archive.tar
+drwxrwxr-x.  7 IC   IC       4096 Oct  7 18:56 iti
+drwxrwxr-x. 12 IC   IC       4096 Oct  3  2022 Labs
+drwxrwxrwx.  2 IC   IC       4096 Apr  4  2017 Music
+drwxrwxrwx.  2 IC   IC       4096 Apr  4  2017 Pictures
+drwxrwxr-x.  4 IC   IC       4096 Oct 15  2022 Projects
+drwxrwxrwx.  2 IC   IC       4096 Apr  4  2017 Public
+-rw-r--r--.  1 root root   417290 Oct 18 12:01 syn_lic.log
+drwxrwxrwx.  4 IC   IC       4096 Sep  8  2021 synopsys_cache_K-2015.06
+drwxrwxrwx.  2 IC   IC       4096 Apr  4  2017 Templates
+drwxrwxrwx.  3 IC   IC       4096 Jun 26  2021 tsmc_fb_cl013g_sc
+drwxrwxr-x.  2 IC   IC       4096 Jun 19  2021 Tutorials
+drwxrwxrwx.  2 IC   IC       4096 Apr  4  2017 Videos
+
+
+#################################################################################################
+
+7. Starting from your home directory, find all files that were modified in the last two day.
+
+[root@IC IC]# find / -mtime -2 -ls
+
+7/net/sockstat
+4026532005    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/icmp
+4026532004    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/udp
+4026532003    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/tcp
+4026532002    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/raw
+4026532001    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/ip_mr_cache
+4026532000    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/ip_mr_vif
+4026531999    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/udplite
+4026531998    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/mcfilter
+4026531997    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/igmp
+4026531996    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/xfrm_stat
+4026531995    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/rt_acct
+4026531993    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/rt_cache
+4026531992    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/route
+4026531991    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/arp
+4026531986    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/psched
+4026531985    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/dev_mcast
+4026531984    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/wireless
+4026531983    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/ptype
+4026531982    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/softnet_stat
+4026531981    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/dev
+4026531980    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/protocols
+4026531971    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/connector
+4026531958    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/netlink
+4026531955    0 dr-xr-xr-x   2 root     root            0 Oct 18 14:06 /proc/114857/net/netfilter
+4026531957    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/netfilter/nf_log
+4026531956    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/netfilter/nf_queue
+4026531953    0 dr-xr-xr-x   2 root     root            0 Oct 18 14:06 /proc/114857/net/stat
+4026532548    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/stat/nf_conntrack
+4026532529    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/stat/ndisc_cache
+4026531994    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/stat/rt_cache
+4026531990    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/net/stat/arp_cache
+244717    0 -r--------   1 root     root            0 Oct 18 14:06 /proc/114857/environ
+244718    0 -r--------   1 root     root            0 Oct 18 14:06 /proc/114857/auxv
+244719    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/status
+244720    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/personality
+244721    0 -rw-------   1 root     root            0 Oct 18 14:06 /proc/114857/limits
+244722    0 -rw-r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/sched
+244723    0 -rw-r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/autogroup
+244724    0 -rw-r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/comm
+244725    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/syscall
+244726    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/cmdline
+244727    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/stat
+244728    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/statm
+244729    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/maps
+244730    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/numa_maps
+244731    0 -rw-------   1 root     root            0 Oct 18 14:06 /proc/114857/mem
+244732    0 lrwxrwxrwx   1 root     root            0 Oct 18 14:06 /proc/114857/cwd -> /
+244733    0 lrwxrwxrwx   1 root     root            0 Oct 18 14:06 /proc/114857/root -> /
+244734    0 lrwxrwxrwx   1 root     root            0 Oct 18 14:06 /proc/114857/exe -> /usr/lib64/vte/gnome-pty-helper
+244735    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/mounts
+244736    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/mountinfo
+244737    0 -r--------   1 root     root            0 Oct 18 14:06 /proc/114857/mountstats
+244738    0 --w-------   1 root     root            0 Oct 18 14:06 /proc/114857/clear_refs
+244739    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/smaps
+244740    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/pagemap
+244741    0 dr-xr-xr-x   2 IC       utmp            0 Oct 18 14:06 /proc/114857/attr
+244820    0 -rw-rw-rw-   1 root     root            0 Oct 18 14:06 /proc/114857/attr/current
+244821    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/attr/prev
+244822    0 -rw-rw-rw-   1 root     root            0 Oct 18 14:06 /proc/114857/attr/exec
+244823    0 -rw-rw-rw-   1 root     root            0 Oct 18 14:06 /proc/114857/attr/fscreate
+244824    0 -rw-rw-rw-   1 root     root            0 Oct 18 14:06 /proc/114857/attr/keycreate
+244825    0 -rw-rw-rw-   1 root     root            0 Oct 18 14:06 /proc/114857/attr/sockcreate
+244742    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/wchan
+244743    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/stack
+244744    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/schedstat
+244745    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/cpuset
+244746    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/cgroup
+244747    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/oom_score
+244748    0 -rw-r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/oom_adj
+244749    0 -rw-r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/oom_score_adj
+244750    0 -rw-r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/loginuid
+244751    0 -r--r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/sessionid
+244752    0 -rw-r--r--   1 root     root            0 Oct 18 14:06 /proc/114857/coredump_filter
+244753    0 -r--------   1 root     root            0 Oct 18 14:06 /proc/114857/io
+229388    0 dr-xr-xr-x   8 IC       IC              0 Oct 18 14:06 /proc/114858
+244826    0 dr-xr-xr-x   3 IC       IC              0 Oct 18 14:06 /proc/114858/task
+244868    0 dr-xr-xr-x   6 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858
+244869    0 dr-x------   2 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/fd
+244906    0 lrwx------   1 IC       IC             64 Oct 18 14:06 /proc/114858/task/114858/fd/0 -> /dev/pts/0
+244907    0 lrwx------   1 IC       IC             64 Oct 18 14:06 /proc/114858/task/114858/fd/1 -> /dev/pts/0
+244908    0 lrwx------   1 IC       IC             64 Oct 18 14:06 /proc/114858/task/114858/fd/2 -> /dev/pts/0
+244909    0 lrwx------   1 IC       IC             64 Oct 18 14:06 /proc/114858/task/114858/fd/255 -> /dev/pts/0
+244870    0 dr-x------   2 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/fdinfo
+244910    0 -r--------   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/fdinfo/0
+244911    0 -r--------   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/fdinfo/1
+244912    0 -r--------   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/fdinfo/2
+244913    0 -r--------   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/fdinfo/255
+244871    0 dr-x--x--x   2 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/ns
+244914    0 lrwxrwxrwx   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/ns/net -> net:[4026531954]
+244915    0 lrwxrwxrwx   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/ns/uts -> uts:[4026531838]
+244916    0 lrwxrwxrwx   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/ns/ipc -> ipc:[4026531839]
+244917    0 lrwxrwxrwx   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/ns/mnt -> mnt:[4026531840]
+244918    0 lrwxrwxrwx   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/ns/pid -> pid:[4026531836]
+244872    0 -r--------   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/environ
+244873    0 -r--------   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/auxv
+244874    0 -r--r--r--   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/status
+244875    0 -r--r--r--   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/personality
+244876    0 -rw-------   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/limits
+244877    0 -rw-r--r--   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/sched
+244878    0 -rw-r--r--   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/comm
+244879    0 -r--r--r--   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/syscall
+244880    0 -r--r--r--   1 IC       IC              0 Oct 18 14:06 /proc/114858/task/114858/cmdline
+
+
+#################################################################################################################
+
+8. Starting from /etc, find files owned by root user.\
+
+/etc/gdm/PostLogin
+/etc/gdm/PostLogin/Default.sample
+/etc/gdm/gdm.schemas
+/etc/gdm/PostSession
+/etc/gdm/PostSession/Default
+/etc/gdm/custom.conf
+/etc/gdm/Init
+/etc/gdm/Init/Default
+/etc/rc3.d
+/etc/idmapd.conf
+/etc/ssh
+/etc/ssh/ssh_host_dsa_key.pub
+/etc/ssh/sshd_config
+/etc/ssh/ssh_host_rsa_key
+/etc/ssh/ssh_host_dsa_key
+/etc/ssh/ssh_host_rsa_key.pub
+/etc/ssh/ssh_host_key
+/etc/ssh/ssh_host_key.pub
+/etc/ssh/moduli
+/etc/ssh/ssh_config
+/etc/passwd-
+/etc/sos.conf
+/etc/sudo.conf
+/etc/PackageKit
+/etc/PackageKit/Vendor.conf
+/etc/PackageKit/PackageKit.conf
+/etc/sysctl.conf
+/etc/libuser.conf
+/etc/pkcs11
+/etc/pkcs11/modules
+/etc/redhat-release
+/etc/iproute2
+/etc/iproute2/rt_protos
+/etc/iproute2/rt_scopes
+/etc/iproute2/rt_realms
+/etc/iproute2/rt_tables
+/etc/iproute2/ematch_map
+/etc/iproute2/rt_dsfield
+/etc/pinforc
+/etc/readahead.conf
+/etc/gssapi_mech.conf
+/etc/selinux
+/etc/selinux/config
+/etc/selinux/restorecond_user.conf
+/etc/selinux/semanage.conf
+/etc/selinux/restorecond.conf
+/etc/selinux/targeted
+/etc/selinux/targeted/setrans.conf
+/etc/selinux/targeted/seusers
+/etc/selinux/targeted/contexts
+/etc/selinux/targeted/contexts/virtual_image_context
+/etc/selinux/targeted/contexts/netfilter_contexts
+/etc/selinux/targeted/contexts/x_contexts
+/etc/selinux/targeted/contexts/removable_context
+/etc/selinux/targeted/contexts/failsafe_context
+/etc/selinux/targeted/contexts/initrc_context
+/etc/selinux/targeted/contexts/securetty_types
+/etc/selinux/targeted/contexts/customizable_types
+/etc/selinux/targeted/contexts/users
+/etc/selinux/targeted/contexts/users/root
+/etc/selinux/targeted/contexts/users/unconfined_u
+/etc/selinux/targeted/contexts/users/xguest_u
+/etc/selinux/targeted/contexts/users/user_u
+/etc/selinux/targeted/contexts/users/guest_u
+/etc/selinux/targeted/contexts/users/staff_u
+/etc/selinux/targeted/contexts/files
+/etc/selinux/targeted/contexts/files/file_contexts.homedirs
+/etc/selinux/targeted/contexts/files/media
+/etc/selinux/targeted/contexts/files/file_contexts
+/etc/selinux/targeted/contexts/default_contexts
+/etc/selinux/targeted/contexts/userhelper_context
+/etc/selinux/targeted/contexts/sepgsql_contexts
+/etc/selinux/targeted/contexts/dbus_contexts
+/etc/selinux/targeted/contexts/virtual_domain_context
+/etc/selinux/targeted/contexts/default_type
+/etc/selinux/targeted/policy
+/etc/selinux/targeted/policy/policy.24
+/etc/selinux/targeted/logins
+/etc/selinux/targeted/modules
+/etc/selinux/targeted/modules/semanage.trans.LOCK
+/etc/selinux/targeted/modules/active
+/etc/selinux/targeted/modules/active/base.pp
+/etc/selinux/targeted/modules/active/netfilter_contexts
+/etc/selinux/targeted/modules/active/file_contexts.homedirs
+/etc/selinux/targeted/modules/active/policy.kern
+/etc/selinux/targeted/modules/active/file_contexts.template
+/etc/selinux/targeted/modules/active/users_extra
+/etc/selinux/targeted/modules/active/homedir_template
+/etc/selinux/targeted/modules/active/seusers.final
+/etc/selinux/targeted/modules/active/modules
+/etc/selinux/targeted/modules/active/modules/java.pp
+/etc/selinux/targeted/modules/active/modules/devicekit.pp
+/etc/selinux/targeted/modules/active/modules/livecd.pp
+/etc/selinux/targeted/modules/active/modules/awstats.pp
+/etc/selinux/targeted/modules/active/modules/smstools.pp
+/etc/selinux/targeted/modules/active/modules/zosremote.pp
+/etc/selinux/targeted/modules/active/modules/uucp.pp
+/etc/selinux/targeted/modules/active/modules/qpidd.pp
+/etc/selinux/targeted/modules/active/modules/fprintd.pp
+/etc/selinux/targeted/modules/active/modules/arpwatch.pp
+/etc/selinux/targeted/modules/active/modules/mysql.pp
+/etc/selinux/targeted/modules/active/modules/likewise.pp
+/etc/selinux/targeted/modules/active/modules/policykit.pp
+/etc/selinux/targeted/modules/active/modules/gpsd.pp
+/etc/selinux/targeted/modules/active/modules/openshift-origin.pp
+/etc/selinux/targeted/modules/active/modules/mip6d.pp
+/etc/selinux/targeted/modules/active/modules/podsleuth.pp
+/etc/selinux/targeted/modules/active/modules/canna.pp
+/etc/selinux/targeted/modules/active/modules/sectoolm.pp
+/etc/selinux/targeted/modules/active/modules/unprivuser.pp
+/etc/selinux/targeted/modules/active/modules/cinder.pp
+/etc/selinux/targeted/modules/active/modules/lldpad.pp
+/etc/selinux/targeted/modules/active/modules/dcc.pp
+/etc/selinux/targeted/modules/active/modules/glusterd.pp
+/etc/selinux/targeted/modules/active/modules/postgrey.pp
+/etc/selinux/targeted/modules/active/modules/automount.pp
+/etc/selinux/targeted/modules/active/modules/cvs.pp
+/etc/selinux/targeted/modules/active/modules/sssd.pp
+/etc/selinux/targeted/modules/active/modules/gpm.pp
+/etc/selinux/targeted/modules/active/modules/vpn.pp
+/etc/selinux/targeted/modules/active/modules/watchdog.pp
+/etc/selinux/targeted/modules/active/modules/unconfineduser.pp
+/etc/selinux/targeted/modules/active/modules/nut.pp
+/etc/selinux/targeted/modules/active/modules/mozilla.pp
+/etc/selinux/targeted/modules/active/modules/usbmuxd.pp
+/etc/selinux/targeted/modules/active/modules/nova.pp
+/etc/selinux/targeted/modules/active/modules/postgresql.pp
+/etc/selinux/targeted/modules/active/modules/avahi.pp
+/etc/selinux/targeted/modules/active/modules/snort.pp
+/etc/selinux/targeted/modules/active/modules/cloudform.pp
+/etc/selinux/targeted/modules/active/modules/rtas.pp
+/etc/selinux/targeted/modules/active/modules/rhnsd.pp
+/etc/selinux/targeted/modules/active/modules/keystone.pp
+/etc/selinux/targeted/modules/active/modules/comsat.pp
+/etc/selinux/targeted/modules/active/modules/gnome.pp
+/etc/selinux/targeted/modules/active/modules/radvd.pp
+/etc/selinux/targeted/modules/active/modules/webalizer.pp
+/etc/selinux/targeted/modules/active/modules/drbd.pp
+/etc/selinux/targeted/modules/active/modules/rhgb.pp
+/etc/selinux/targeted/modules/active/modules/zabbix.pp
+/etc/selinux/targeted/modules/active/modules/openvpn.pp
+/etc/selinux/targeted/modules/active/modules/mailman.pp
+/etc/selinux/targeted/modules/active/modules/lockdev.pp
+/etc/selinux/targeted/modules/active/modules/sge.pp
+/etc/selinux/targeted/modules/active/modules/ntp.pp
+/etc/selinux/targeted/modules/active/modules/cfengine.pp
+/etc/selinux/targeted/modules/active/modules/roundup.pp
+/etc/selinux/targeted/modules/active/modules/cups.pp
+/etc/selinux/targeted/modules/active/modules/oddjob.pp
+/etc/selinux/targeted/modules/active/modules/dirsrv-admin.pp
+
+
+#################################################################################################################
+
+9. Find all directories in your home directory.
+
+[root@IC IC]# 
+[root@IC IC]# cd /home/
+[root@IC home]# ll | grep "^d"
+drwx------.  4   503   503 4096 Oct 15 19:38 baduser
+drwxrwxrwx. 46 IC    IC    4096 Oct 18 14:11 IC
+drwx------.  4 islam islam 4096 Oct 15 20:09 islam
+
+
+#################################################################################################################
+
+10. Write a command to search for all files on the system that, its name is “.profile”.
+
+[root@IC ~]# find / -name "*.profile"
+/opt/Synopsys/Verdi2015/share/eclipse/linux64/p2/org.eclipse.equinox.p2.engine/profileRegistry/epp.package.cpp.profile
+/opt/Cadence/IC617/tools.lnx86/deft/eclipse/p2/org.eclipse.equinox.p2.engine/profileRegistry/PlatformProfile.profile
+/opt/Cadence/IC617/tools.lnx86/dfII/samples/tutorials/composer/dotfiles/dec/.profile
+/opt/Cadence/IC617/share/pcb/toolbox/config/postproc/basicplot.profile
+/opt/Cadence/IC617/share/pcb/toolbox/config/batchplot/default.profile
+/opt/Cadence/Incisive14/tools.lnx86/esl/eclipse/eclipse32/vsp_eclipse/p2/org.eclipse.equinox.p2.engine/profileRegistry/profile.profile
+/opt/Cadence/Incisive14/tools.lnx86/esl/eclipse/eclipse64/vsp_eclipse/p2/org.eclipse.equinox.p2.engine/profileRegistry/profile.profile
+/etc/lvm/profile/thin-generic.profile
+/etc/lvm/profile/metadata_profile_template.profile
+/etc/lvm/profile/command_profile_template.profile
+/etc/lvm/profile/thin-performance.profile
+/home/IC/etc/lvm/profile/thin-generic.profile
+/home/IC/etc/lvm/profile/metadata_profile_template.profile
+/home/IC/etc/lvm/profile/command_profile_template.profile
+/home/IC/etc/lvm/profile/thin-performance.profile
+
+
+##############################################################################################################
+
+11. List the directories that have 777 Permissions in the system. 
+
+>> [root@IC Desktop]# find / -type d -perm 777 -print
+
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor3bx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2b2x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and2x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkmx2x6m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffqx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffnhx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oa22xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand2x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi221x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand3bx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffrhqx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dfftrx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffhqx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2bb2x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffshqx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi2b1x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffhqx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/invx10m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffshqx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor3x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/xnor3x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/bufx6m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai22xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi2bb2xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor3x6m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2b2x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and2x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffsx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkbufx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi221x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sedffhqx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and4x12m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/addfhx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai21x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor2x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mxi4x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi31x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and4x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkbufx3m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mx2x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffnsrhx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkxor2x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sedfftrx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi33x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi2bb1xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor3bxlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oa21x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand4bx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and4x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkinvx20m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand4x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2b1x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/addhx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/tbufx6m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi22x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/invx14m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/invx32m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffqnx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor4bbx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dly4x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffrhqx8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi2bb1x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand4bx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2b11x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/tlatntscax4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dly4x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffrx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand2x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mxi2x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/ao21x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/xnor2x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mx2x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffsqx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffsrhqx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand4x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffhx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi2b1x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai21bx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffsrhqx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2bb1x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffhx8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand4x6m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffnhx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/ao2b2bx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mxi3x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/tlatx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffrhqx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2bb2xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffhx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffshqx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkinvx12m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and4xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mxi3x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mx4x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand2bx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/ao2b2bx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi32x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffqx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor3x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi21bx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor2bxlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi33x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand2bx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand2x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi31xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/ao2b2x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand4bbx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffqnx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/xnor2x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkbufx32m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffsrx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai33x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2b1x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dfftrx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffhqx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai21x3m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffrx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor4bxlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai21x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand4xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand3x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/ao22x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai21bx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffnhx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/ao22x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and4x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffqx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/invx6m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkxor2x16m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkbufx20m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/bufx18m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mx4xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor2xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffqx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi2bb2x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai22x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand2x12m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffnsrhx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mxi3x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffqnx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mxi4x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and3x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/invx16m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffhqx8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mx4x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/bufx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/tlatx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand4bbx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and3x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oa22x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2b11xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffshqx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/and3x12m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkand2x16m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/addfx8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/bufx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dly2x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi2bb2x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkand2x3m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkand2x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2b2x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi21x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi32x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/bufx32m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor2x12m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oa22x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/tlatntscax16m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi32x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor4x12m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai211xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mx3x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/addhx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkinvx16m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2bb1x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/bufx14m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand3x3m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/smdffhqx8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkinvx4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffnhx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mdffhqx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi2bb1x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkmx2x8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nor2bx2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkbufx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/nand3xlm
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai2b11x1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/xnor2x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/aoi2b1x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai31x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/sdffhx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mxi4x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/dffsrhqx1m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/clkxor2x2m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/mxi2dx8m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/oai22x4m
+/home/IC/tsmc_fb_cl013g_sc/aci/sc-m/vhdl/tsmc13_mvhd/invx2m
+
+#########################################################################################################
+
+12. Remove package ncompress and ksh
+
+for deleting files
+
+[root@IC ~]# yum remove ncompress
+Loaded plugins: fastestmirror
+Setting up Remove Process
+Match for argument: ncompress
+remove ncompress: successfully
+
+OR
+
+for deleting files and configrations.
+
+[root@IC ~]# yum purge ncompress
+Loaded plugins: fastestmirror
+Setting up Remove Process
+Match for argument: ncompress
+remove ncompress: successfully
+
+########################################################################################################
+
+13. Create a symbolic link of /etc/passwd in /boot. 
+
+[root@IC ~]# ln -s /etc/passwd /boot
+[root@IC ~]# ll -i /boot
+total 39700
+   14 -rw-r--r--. 1 root root   107134 Jul  2  2015 config-2.6.32-573.el6.x86_64
+65027 drwxr-xr-x. 3 root root     1024 Mar 31  2017 efi
+65025 drwxr-xr-x. 2 root root     1024 Mar 31  2017 grub
+   17 -rw-------. 1 root root 27996981 Mar 31  2017 initramfs-2.6.32-573.el6.x86_64.img
+   18 -rw-------. 1 root root  5507986 Mar 31  2017 initrd-2.6.32-573.el6.x86_64kdump.img
+   11 drwx------. 2 root root    12288 Mar 31  2017 lost+found
+   19 lrwxrwxrwx. 1 root root       11 Oct 18 14:33 passwd -> /etc/passwd
+   15 -rw-r--r--. 1 root root   205998 Jul  2  2015 symvers-2.6.32-573.el6.x86_64.gz
+   13 -rw-r--r--. 1 root root  2585052 Jul  2  2015 System.map-2.6.32-573.el6.x86_64
+   16 -rwxr-xr-x. 1 root root  4222192 Jul  2  2015 vmlinuz-2.6.32-573.el6.x86_64
+
+#########################################################################################################
+
+14. Create a hard link of /home/iti/f1.txt in /home/iti/Desktop.
+
+[root@IC ~]# ln /home/iti/f1.txt /home/iti/Desktop.
+
+
+#########################################################################################################
+
+15. List the inode number of /home/iti/f1.txt
+
+[root@IC ~]# ls -l -i -h /home/iti/f1.txt
+
+#########################################################################################################
+
+16. Copy /etc/passwd to your home directory, and Edit in the file you copied, and then use these command 
+    again, and check the output. 
+
+[root@IC ~]# cp /etc/passwd /home/IC/Desktop/my_passwdcd
+[root@IC ~]# chmod 777 /home/IC/Desktop/my_passwdcd
+[root@IC ~]# vi /home/IC/Desktop/my_passwdcd
+
+mohamed:x:0:0:m:/mohamed:/bin       >> the only added line difference about the original file.
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+gopher:x:13:30:gopher:/var/gopher:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+usbmuxd:x:113:113:usbmuxd user:/:/sbin/nologin
+vcsa:x:69:69:virtual console memory owner:/dev:/sbin/nologin
+rpc:x:32:32:Rpcbind Daemon:/var/cache/rpcbind:/sbin/nologin
+rtkit:x:499:497:RealtimeKit:/proc:/sbin/nologin
+avahi-autoipd:x:170:170:Avahi IPv4LL Stack:/var/lib/avahi-autoipd:/sbin/nologin
+abrt:x:173:173::/etc/abrt:/sbin/nologin
+apache:x:48:48:Apache:/var/www:/sbin/nologin
+rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/sbin/nologin
+haldaemon:x:68:68:HAL daemon:/:/sbin/nologin
+gdm:x:42:42::/var/lib/gdm:/sbin/nologin
+ntp:x:38:38::/etc/ntp:/sbin/nologin
+saslauth:x:498:76:Saslauthd user:/var/empty/saslauth:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+pulse:x:497:495:PulseAudio System Daemon:/var/run/pulse:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+IC:x:501:501:EDA:/home/IC:/bin/bash
+islam:x:502:502:Islam Askar:/home/islam:/bin/bash
+[root@IC ~]# 
+[root@IC ~]# 
+[root@IC ~]# diff /etc/passwd /home/IC/Desktop/my_passwdcd
+0a1
+> mohamed:x:0:0:m:/mohamed:/bin
+
+
+>> the data that changed in the copied file can't be updated in the original file. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

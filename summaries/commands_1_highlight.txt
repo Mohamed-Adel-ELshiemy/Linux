@@ -1,0 +1,32 @@
+1.date
+2.cal
+3.uname >>> type of operating system
+4.history >>> all above commands 
+5.clear ==ctrl+l
+6. ctrl+r >>> search in history
+7.nautilus >>> file maneger like pc
+8. uname -n >> your name 
+9. uname -a >>> all information about your device
+10.cal ;uname >>>; seperate between commands
+11.man uname >>> manual of way to using command 
+12.q >>> logout of manual
+13.uname -n -a >>> multi options
+14. man -k >>> search about keyword in manual
+15.whatis + command >>> manual abaut this command 
+16.echo +string >>> print this string 
+********* directory commands *********
+1.pwd >>> print location
+2. cd + directory >>> change directory
+3.ls >>> content in directory
+4.touch >>> create a file 
+5.rm >>> remove file 
+6.mkdir >>> make directory
+7.rmdir >>> remove empty directory 
+8.rm -r + dir >>> remove directory
+9.cat +file >>> show entire the file 
+10.more >>> page by page
+11.head >>> first 10 lines
+12head -5 >>> first 5 lines
+13.tail >>>  end 10 lines 
+14.
+Wed Oct 11 20:35:12 CST 2023

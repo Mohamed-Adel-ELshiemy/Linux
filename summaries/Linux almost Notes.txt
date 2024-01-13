@@ -1,0 +1,310 @@
+############## PARt 0 ######################
+1.date
+2.cal
+3.uname >>> type of operating system
+4.history >>> all above commands 
+5.clear ==ctrl+l
+6. ctrl+r >>> search in history
+7.nautilus >>> file maneger like pc
+8. uname -n >> your name 
+9. uname -a >>> all information about your device
+10.cal ;uname >>>; seperate between commands
+11.man uname >>> manual of way to using command 
+12.q >>> logout of manual
+13.uname -n -a >>> multi options
+14. man -k >>> search about keyword in manual
+15.whatis + command >>> manual abaut this command 
+16.echo +string >>> print this string 
+********* directory commands *********
+1.pwd >>> print location
+2. cd + directory >>> change directory
+3.ls >>> content in directory
+4.touch >>> create a file 
+5.rm >>> remove file 
+6.mkdir >>> make directory
+7.rmdir >>> remove empty directory 
+8.rm -r + dir >>> remove directory
+9.cat +file >>> show entire the file 
+10.more >>> page by page
+11.head >>> first 10 lines
+12head -5 >>> first 5 lines
+13.tail >>>  end 10 lines 
+
+
+##################### PART 1 ########################
+
+• useradd -u user id -g <main group id> -G <supplementary groups ids> -c <"comments u wanna add"  -h <home directroy> -s <shell type>  ex./bin/bash <user name>
+• passwd <username>
+
+• passwd without name, changes the current user password
+
+• chage [options] username
+
+-m chage min days between password changes
+
+-max max 
+
+-E date which will the password expire ex.YYYY-MM-DD
+
+• usermod : to modify user info ,, same options as 'useradd' command 
+
+-G : will overwrite the existing groups
+
+-a : will append to the existing groups
+
+-l : changes the user name. ex. -l <new username>
+
+-L : locks the account 
+
+• userdel  username : removes the user info
+-r : removes all user data , info and files 
+
+• su <username>: switches user.
+
+su : without any arguments switches to root.
+
+su -<username> :switches and forces startup applications. 
+
+• to logout : exit or ctrl+d.
+
+• groupadd <group name> : adds new group.
+
+• groupmod <group name> : to modify group info 
+
+-n <new name>
+-g < group id >
+
+• groupdel : removes group.
+
+• gpasswd -a <username groupname> : adds user to a group.
+• gpasswd <groupname> : create password a group.
+• groups : displayes the groups you are a member of .
+• newgrp <group name> : to switch to another group.
+ 
+------------------------------------------------------------------
+# super user feature gives the noraml user additional permissions.
+
+• visudo : makes user a super user .
+
+• whoami : displays current user name
+• id : displays current user infos.
+
+• sudo : to preform any command as a super user.
+
+• ls -l : displays all files and directories info and its owners info.
+ -i : displays file inode number.
+-h : displays output in a readable format.
+## -rw- : read and write permissions,, -r- : only read ,, -w- : only write .
+## -x- : excute permission.
+ 
+• chown <owner username> <file i want to change>. ## must put ":" before group name.
+• chown <owner username> :<owner group name> <file name>.
+• chown :<owner group name> <file>
+
+# this command changes ownership for a certain files and only root can do this.
+
+• find -<username> -perm -x : finds  user executable files.
+
+• chmod <u,g,o,a> < +,=,-> < r,w,x> <file name> ## o : other users . ## a : any user
+" ex. chmod u+r file.text : it means ,, u :current user , + : want to add , r : read permission to the file. "
+
+• chmod permission <file name> 
+
+## permissions >> read = 4  ,, write = 2 ,, execute =1 .
+
+DDD   1st Digit : user ,, 2nd Digit : group ,, 3rd Digit : other.
+
+ex. chmod 777 file.text : means ,, gives read+write+execute permission to other.
+
+### more explanation ,, in order to give r+w+x permissions to : 
+                         user : only have to write 1 digit : 7
+						 user and group: we have to write 2 digits  : 77
+						user,group and other: we have to write 3 digits  : 777
+	
+---------------------------------------------------------------------	
+						 
+    interfaces names : ex. -eth0 -eth1 
+
+• ifconfig : list all interface names.
+• ifconfig <iterface name> <ip> : gives the interface a certain ip
+• ifdown <interface name> : shuts down the interface
+• ifup : brings back the interface.
+		
+---------- To add a DNS  ----------		
+vi sudo	/etc/resolv.conf 	
+			
+  then,, write in the file " nameserver <DNS> " : specify a DNS manually.
+
+• hostname -b < name> : changes host name
+• host < website> : gets the website address
+• ping <website name> : tests the network latency and packet loss by sending and recieving a packet to a server.
+• traceroute < remote server ip> : shows the router path between local server and remote server.
+
+####################### PART 2 #####################################################
+• echo $<variable name> 
+                         both display the value of a specific variable.   
+• env   <variable name> 
+
+• env : displays or sets environment variables
+ex. env : displays all environment variables             ## Becareful ##
+ex. env HOME : displays HOME variable
+ex. env HOME= <"variable value> : sets the variable value. 
+• alias < alias name we want> < = > < ' command '> : allows you to create a shortcut for a command or sequence of commands.
+ex. alias 11='ls -l' ,, after setting this alias, whenever we type 11 in terminal it will execute ls -l command.
+-u : user id   : we use it to list the variables for a specified user.
+• unalias <alias name> :removes the alias.
+## we can bypass existing aliases.
+-------------------------------------------
+• wc <option> <file name> : counts number of lines, words or characters.
+ -l : word , -c : character , -w : words.
+
+• diff <file name> <file name> compares between two files.
+• grep < keyword or regx> <file name> : searches for a keyword inside a file.
+-i : to ignore cases sensitivity.
+-n : displays line numbers.
+-R : to search inside directories too.
+
+• cut < options ><file name> :  extracts specified columns of text from each line of a file.
+-d : specifies the delimiter that seperates between fields. 
+-f : specifies  field  or column. 
+
+• nice -n < priority value> <command> : sets command priority
+• renice < priority value> -p < process id>  : change priority for the running processes
+ -g : applies the priority for a specified group
+ 
+## SIGTERM  : signal used to notify a process to terminate. " 15 "
+## SIGKILL  : signal used to terminates process immediately. " 9 "
+• kill -<signal value> or -<signal name > <process id> : command used to send signal to a process.
+• pkill : the difference that it takes process name not id.
+
+ex. if we want to use SIGTERM ==> kill -15 <process id>.
+
+• ps : displays information about running processes. 
+-e : displays all system processes.
+-f : full information 
+-u : user id 
+
+• top : real-time process monitor, similar to " task manager " 
+
+• pgrep < keyword> : used to find process ids of processes that match the keyword. 
+-l : list process name.
+-x : exact match.
+-u : user id.
+
+## we can use "pgrep" to find a process and then terminate it by "kill".
+
+## " & " after a command is used to run this process in the background.
+
+• jobs  :displays a list of all processes that are running in the background.
+• sleep <seconds> : pauses the execution of the shell for a specified number of seconds.
+• ctrl + z : stops the currently running process.
+• bg  : sends a suspended process to the background.
+• fg  : brings a suspended process back to the foreground.
+
+##  we can use after bg or fg %<process>.
+## we can redirect the output of a command using > "filename".
+## we can redirect only the error result using 2> " file name".
+## if we want to append to the file instead of overwriting it we use >> "file name".
+
+############### PART 3 ###############################################
+
+• we can use the pipe |  to feed the output of a command to another command.
+
+------------------------------------------------
+### for centos #####
+
+• yum search <package name> :  search for packages.
+• yum install <package name> :  install packages.
+• yum upgrade < package name > : update packages.
+• yum remove < package name > : removes binary files for the package no removing configration files.
+• yum purge <package name > : removes binary and configurations. 
+• yum update : updates all packages on the system.
+## we can use yum install < file path>.
+
+#### for ubuntu#####
+
+• instead of yum we use " apt-get command ".
+
+----------------------------------------------------
+
+• updatedb : used to update the data base for locate commmand.
+• locate <keyword> : to search for all files has this keyword  ##searches in database .
+
+• find <path> : used to search for files on hardware. 
+-name <file name> : we can use it as regx, but we must place it in " " 
+-perm : used to find files with specific permission.
+-exec : to execute a command on the result .
+-user <loginID> : finds all files owened by this user.
+-type < f or d> : to search for either file or directroy.
+
+• sort <file name> : used to sort file content alphabetcally.
+-n : to sort it numerically in case the file contains numbers.
+
+-t <delimiter> : used to specify a delimiter.
+-k <field number> : used to specify certain field or column.
+
+• tee < file name > : takes an input and writes output to file  and in the shell.
+
+## mostly used in commands piping to write the output to a file and to pass it to the next command.
+
+• tar cf <archive name.tar> < files> : used to archive files into archive.
+c : create.
+f : file .
+v : verbose ##to print output in the shell##
+
+• tar tf < archive name.tar> : used to list archive content.
+t : table.
+
+• tar xf <archive name.tar> : used to extract archive .
+x : extract.
+
+• compress <filename> : used to compress files. 
+## overwrites the original file with the compressed file.
+
+-v : verbose ##  used to print output on the shell. 
+
+• zcat <filename> : lists the compressed file contents .
+
+• uncompress <filename> : extracts the compressed files.
+-v : verbose ## to print output on the shell.
+
+• bzip2 <file name> : more powerful command to compress files.
+
+• bzcat <file name> : to list compressed file contents. 
+
+• bunzip2 <file name> : extracts compressed files.
+
+• df : displays number of free disk blocks and files.
+-h : size in a human readable format.
+
+• du <file name or directory>: used to display size >> (du) is display usage.
+
+-h : human readable format.
+-s : to summerize the output.
+ ## we can combine options ,, ex. " -sh " =" -s -h ". 
+
+• shutdown : to shutdown system
+-time : specify time 
+-r : to restart the system.
+
+## to restart system we use,, reboot or init 6 or ctrl + alt + del.
+
+## ctrl+alt F : is used to access virtual consoles.
+
+• stat <file name> : displays information about file.
+
+• ln <file name> <shortcut> : creates a hard link shortcut.
+• ln -s < file > < shortcut path> : used to create a soft link shortcut.
+-s : soft link.
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,107 @@
+• useradd -u user id -g <main group id> -G <secondary groups ids> -c <"comments u wanna add"  -h <home directroy> -s <shell type>  ex./bin/bash <user name>
+• passwd <username>
+
+• passwd without name, changes the current user password
+
+• change [options] username
+
+-m change min days between password changes
+
+-max max 
+
+-E date which will the password expire ex.YYYY-MM-DD
+
+• usermod : to modify user info ,, same options as 'useradd' command 
+
+-G will overwrite the existing groups
+
+-a will append to the existing groups
+
+-l changes the user name. ex. -l <new username>
+
+-L locks the account 
+
+• userdel  username : removes the user info
+-r  removes all user data , info and files 
+
+• su <username>: switches user.
+
+su without any arguments switches to root.
+
+su -<username> :switches and forces startup applications. 
+
+• to logout : exit or ctrl+d.
+
+• groupadd <group name> : adds new group.
+
+• groupmod <group name> : to modify group info 
+
+-n <new name>
+-g < group id >
+
+• groupdel : renoves group.
+
+• gpasswd -a <username groupname> : adds user to a group.
+• gpasswd <groupname> : create password a group.
+• groups : displayes the groups you are a member of .
+• newgrp <group name> : to switch to another group.
+ 
+
+# super user feature gives the noraml user additional permissions.
+
+• visudo : makes user a super user .
+
+• whoami : displays current user name
+• id : displays current user infos.
+
+• sudo : to preform any command as a super user.
+
+• ls -l : displays all files and directories info and its owners info.
+ 
+-h : displays output in a readable format.
+## -rw- : read and write permissions,, -r- : only read ,, -w- : only write .
+## -x- : excute permission.
+ 
+• chown <owner username> <file i want to change>. ## must put ":" before group name.
+• chown <owner username> :<owner group name> <file name>.
+• chown :<owner group name> <file>
+
+# this command changes ownership for a certain files and only root can do this.
+
+• find -<username> -perm -x : finds  user executable files.
+
+• chmod <u,g,o,a> < +,=,-> < r,w,x> <file name> ## o : other users . ## a : any user
+" ex. chmod u+r file.text : it means ,, u :current user , + : want to add , r : read permission to the file. "
+
+• chmod permission <file name> 
+
+## permissions >> read = 4  ,, write = 2 ,, execute =1 .
+
+DDD   1st D : user ,, 2nd D : group ,, 3rd D : other.
+
+ex. chmod 777 file.text : means ,, gives read+write+execute permission to other.
+--------------------------------------------------------------------
+### more explanation ,, in order to give r+w+x permissions to : 
+                         user : only have to write 1 digit : 7
+						 group: we have to write 2 digits  : 77
+						 other: we have to write 3 digits  : 777
+	
+---------------------------------------------------------------------	
+						 
+    interfaces names : ex. -eth0 -eth1 
+
+• ifconfig : list all interface names.
+• ifconfig <iterface name> <ip> : gives the interface a certain ip
+• ifdown <interface name> : shuts down the interface
+• ifup : brings back the interface.		
+------------ To add a DNS  ----------------------------------			
+vi sudo	/etc/resolv.conf 	
+			
+  then,, write in the file " nameserver <DNS> " : specify a DNS manually.
+-----------------------------------------------
+• hostname -b < name> : changes host name
+• host < website> : gets the website address
+• ping <website name> : tests the network latency and packet loss by sending and recieving a packet to a server.
+• traceroute < remote server ip> : shows the router path between local server and remote server.
+
+## /etc/hosts : contains 
